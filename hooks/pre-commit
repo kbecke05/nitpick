@@ -1,0 +1,26 @@
+#!/bin/sh
+# nitpick pre-commit hook
+# Runs an AI code review on staged changes and blocks the commit if
+# high-severity bugs are found.
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+PYTHON="$REPO_ROOT/venv/bin/python"
+NITPICK="$REPO_ROOT/nitpick.py"
+
+if [ -z "$ANTHROPIC_API_KEY" ]; then
+    echo "[nitpick] ANTHROPIC_API_KEY not set — skipping review."
+    exit 0
+fi
+
+echo "[nitpick] Reviewing staged changes..."
+"$PYTHON" "$NITPICK" --staged
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "[nitpick] Commit blocked: high-severity bugs found."
+    echo "[nitpick] Fix the issues above, or run 'git commit --no-verify' to skip."
+    exit 1
+fi
+
+exit 0
