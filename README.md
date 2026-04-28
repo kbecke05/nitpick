@@ -2,8 +2,7 @@
 
 AI-powered code review in your terminal. Point it at a file or git diff and get structured feedback — bugs, style issues, and suggestions — from Claude in seconds.
 
-<!-- Replace with a terminalizer or asciinema GIF of the CLI in action -->
-<!-- ![nitpick CLI demo](docs/demo.gif) -->
+![nitpick CLI demo](docs/demo.gif)
 
 ---
 
@@ -113,8 +112,7 @@ cd ui && npm run dev
 
 Open [http://localhost:5173](http://localhost:5173), paste code or a git diff, and hit **Review**.
 
-<!-- Replace with a screenshot of the React UI -->
-<!-- ![nitpick UI screenshot](docs/ui-screenshot.png) -->
+![nitpick UI screenshot](docs/ui-screenshot.png)
 
 ---
 
