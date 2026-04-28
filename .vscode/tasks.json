@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "FastAPI Server",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/uvicorn server:app --reload --port 8000",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "kind": "file",
+              "regexp": "^(CRITICAL)\\s+(.*)$",
+              "file": 1,
+              "message": 2
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Started server process",
+            "endsPattern": "Application startup complete"
+          }
+        }
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "nitpick"
+      }
+    },
+    {
+      "label": "React UI",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/ui"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "nitpick"
+      }
+    }
+  ]
+}

@@ -39,7 +39,15 @@ def review_code(code: str, mode: str) -> dict:
     except anthropic.APIError as e:
         raise ReviewError(f"Claude API returned an error: {e}")
 
-    raw = response.content[0].text
+    raw = response.content[0].text.strip()
+
+    # Claude occasionally wraps the response in markdown fences despite instructions.
+    # Strip them silently so the caller never sees this as an error.
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[-1]
+        if raw.endswith("```"):
+            raw = raw[: raw.rfind("```")]
+        raw = raw.strip()
 
     try:
         review = json.loads(raw)

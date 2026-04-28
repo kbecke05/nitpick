@@ -1,10 +1,16 @@
+from pathlib import Path
 from typing import Literal
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from cli.reviewer import ReviewError, review_code
+
+# Load .env from the same directory as this file — works regardless of
+# what directory VS Code/uvicorn was launched from.
+load_dotenv(Path(__file__).parent / ".env", override=True)
 
 app = FastAPI(title="nitpick", description="AI-powered code review API")
 
