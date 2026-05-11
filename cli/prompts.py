@@ -42,7 +42,7 @@ If there are no bugs or no style issues, return an empty array [] for that field
 The line field must be null when reviewing a git diff (line numbers are unreliable in diffs)."""
 
 
-def build_messages(code: str, mode: str) -> list[dict]:
+def build_messages(code: str, mode: str) -> "list[dict]":
     if mode == "file":
         content = (
             f"Please review the following file:\n\n{code}"
