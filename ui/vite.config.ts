@@ -4,6 +4,11 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./src/test-setup.ts"],
+  },
   server: {
     proxy: {
       // Requests to /api/* are forwarded to the FastAPI server.
